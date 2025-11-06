@@ -1,44 +1,162 @@
-.serie-card 
-{
+
+:root {
+    --card-radius: 12px;
+    --card-text: #e9defa;
+    --color-text-second: rgba(233,222,250,0.85);
+    --card-bg: #4B3F72;
+    --card-border: #1F2041;
+    --shadow: 0 6px 18px rgba(17, 17, 17, 0.08);
+}
+
+.serie-card {
     width: 20%;
-    height: auto;
-    text-align: center;
+    min-width: 220px;
     display: flex;
     flex-direction: column;
-    border-radius: 15px;
-    background-color: var(--cardsBG);
-    box-shadow: rgba(0, 0, 0, 0.27) 0px 1px 3px, rgba(0, 0, 0, 0.39) 0px 2px 5px;
-    transition: 0.3s;
+    border-radius: var(--card-radius);
+    background-color: var(--card-bg);
+    color: var(--card-text);
+    border: 3px solid var(--card-border);
+    box-shadow: var(--shadow);
+    transition: transform .22s ease, box-shadow .22s ease;
     overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    gap: 8px;
+    padding-bottom: 6px;
+}
 
-    &:hover {
-        transition: 0.3s;
-        transform: scale(1.1);
-    }
- 
+.serie-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 14px 30px rgba(17,17,17,0.12);
+}
+
+.serie-card:hover img {
+    transform: scale(1.2);
 }
 
 
-.titulitis {
-    color: #bdb7c1;
-    text-align: left;
-    font-weight: bold;
-    font-size: 0.9em;
-    margin-top: 10px;
-    padding: 10px;
-    padding-left: 15px;
-    text-decoration: none;
+.serie-photo {
+    aspect-ratio: 16/9;
+    width: 100%;
+    background-color: rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.serie-photo img,
+img.serie-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .4s ease;
+}
+
+
+
+
+.add-fav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 17%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(233,222,250,0.12);
+    color: var(--card-text);
+    border-radius: 15px;
+    border: 2px solid rgba(255,255,255,0.06);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    transition: transform .16s ease, background .16s ease;
     cursor: pointer;
 }
 
+.add-fav:hover {
+    transform: scale(1.06);
+    background: rgba(233,222,250,0.18);
+}
 
-.desc {
-    color: #383D3B;
+.add-fav:active {
+    transform: scale(0.96);
+}
+
+.serie-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--card-text);
+    margin: 0;
+    padding: 10px 16px 0 16px;
+    line-height: 1.2;
+}
+
+
+.serie-desc {
+    color: var(--color-text-second);
     text-align: left;
-    text-align: justify;
-    font-weight: bold;
-    font-size: 1em;
-    margin-top: -20px;
-    padding: 10px;
-    padding-left: 15px;
+    font-weight: 400;
+    font-size: 0.95rem;
+    margin: 0;
+    padding: 8px 16px 10px 16px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.serie-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px 12px 12px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.02));
+}
+
+
+.see-more {
+    background: transparent;
+    color: var(--card-text);
+    border: 2px solid var(--card-border);
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform .14s ease, background .14s ease, color .14s ease;
+}
+
+.see-more:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.04);
+}
+
+.see-more:active {
+    transform: translateY(0px) scale(0.96);
+}
+
+.serie-tag {
+    font-size: 0.8rem;
+    color: var(--color-text-second);
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.03);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+    .serie-card { width: 47%; }
+}
+
+@media (max-width: 640px) {
+    .serie-card { width: 100%; min-width: 0; }
+    .serie-title { font-size: 1rem; }
+    .serie-desc { -webkit-line-clamp: 4; }
 }

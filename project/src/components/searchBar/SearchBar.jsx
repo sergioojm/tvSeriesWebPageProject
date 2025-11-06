@@ -11,14 +11,12 @@ function Search({type = 'text', placeholder = '', disabled = false, className = 
   };
 
   return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      value={inputValue} 
-      onChange={handleChange}
-      className={className}
-      disabled={disabled}
-    />
+    <>
+      <input type={type} placeholder={placeholder} value={inputValue} onChange={handleChange} className={className} disabled={disabled}/>
+      <button className="search-button" onClick={() => alert(`Searching for: ${inputValue}`)}>Search</button>
+
+    </>
+
   );
 }
 

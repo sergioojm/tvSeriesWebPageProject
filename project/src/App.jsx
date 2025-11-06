@@ -7,6 +7,7 @@ function App() {
     <>
       <Search placeholder="Buscar serie..." />
       <Serie/>
+       <Serie/>
     </>
    
   )
