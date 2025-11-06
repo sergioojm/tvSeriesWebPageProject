@@ -61,6 +61,7 @@ function App() {
             genre={item.show.genres.join(", ")}
             photoUrl={item.show.image?.medium}
             addFavourite={() => addFavourite(item)}
+            btnText={"Añadir a Favoritos"}
           />
         ))}
       </div>
@@ -74,6 +75,7 @@ function App() {
             genre={item.show.genres.join(", ")}
             photoUrl={item.show.image?.medium}
             addFavourite={() => removeFavourite(item)}
+            btnText={"Eliminar de Favoritos"}
           />
         ))}
       </div>
