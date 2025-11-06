@@ -5,7 +5,10 @@
     --color-text-second: rgba(233,222,250,0.85);
     --card-bg: #4B3F72;
     --card-border: #1F2041;
-    --shadow: 0 6px 18px rgba(17, 17, 17, 0.08);
+}
+
+* {
+    font-family: lexend, sans-serif;
 }
 
 .serie-card {
@@ -17,8 +20,7 @@
     background-color: var(--card-bg);
     color: var(--card-text);
     border: 3px solid var(--card-border);
-    box-shadow: var(--shadow);
-    transition: transform .22s ease, box-shadow .22s ease;
+    transition: transform .22s ease, scale .22s ease, box-shadow .22s ease;
     overflow: hidden;
     position: relative;
     cursor: pointer;
@@ -27,14 +29,16 @@
 }
 
 .serie-card:hover {
-    transform: translateY(-6px) scale(1.01);
-    box-shadow: 0 14px 30px rgba(17,17,17,0.12);
+    transform: translateY(-26px);
 }
 
 .serie-card:hover img {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
+.serie-card:hover .serie-desc {
+    filter: blur(0);
+}
 
 .serie-photo {
     aspect-ratio: 16/9;
@@ -107,6 +111,8 @@ img.serie-photo {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    filter: blur(2px);
+    transition: filter 0.3s ease;
 }
 
 
