@@ -2,16 +2,14 @@ import './styleSerie.css';
 import { useState } from 'react';
 import reactsvg from '../../assets/react.svg';
 
-function Serie({title, description, genre, photoUrl})
+function Serie({title, description, genre, photoUrl, addFavourite})
 {
-
-
     return (
         
         <div className='serie-card'>
             <div className="serie-photo">
                 <img src={photoUrl} alt="Fernando Alonso" />
-                <button className='add-fav'>Favoritos</button>
+                <button className='add-fav' onClick={addFavourite}>Favoritos</button>
             </div>
 
             <p className="serie-title">{title}</p>

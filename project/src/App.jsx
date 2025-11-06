@@ -8,7 +8,8 @@ function App() {
 
   const [input, setInput] = useState('');
   const [series, setSeries] = useState([]);
-
+  const [favouriteSeries, setFavouriteSeries] = useState(JSON.parse(localStorage.getItem('series')) || []);
+ 
 
   const handleChangeFunction = (e) => {
       setInput(e.target.value);
@@ -20,12 +21,25 @@ function App() {
     try {
       const response = await fetch(`https://api.tvmaze.com/search/shows?q=${input}`);
       const data = await response.json();
-      console.log(data);
+      
       setSeries(data);
     } catch (error) {
       console.error("Error al buscar series:", error);
     }
   };
+
+  const addFavourite = (serie) => {
+    const newFavouriteSeries = [...favouriteSeries, serie];
+    setFavouriteSeries(newFavouriteSeries);
+    localStorage.setItem('series', JSON.stringify(newFavouriteSeries));
+  };
+
+  const removeFavourite = (serie) => {
+    const newFavouriteSeries = favouriteSeries.filter((fav) => fav.show.id !== serie.show.id);
+    setFavouriteSeries(newFavouriteSeries);
+    localStorage.setItem('series', JSON.stringify(newFavouriteSeries));
+  }
+
 
   return (
     <>
@@ -46,6 +60,20 @@ function App() {
             description={item.show.summary?.replace(/<[^>]*>/g, "") || ""}
             genre={item.show.genres.join(", ")}
             photoUrl={item.show.image?.medium}
+            addFavourite={() => addFavourite(item)}
+          />
+        ))}
+      </div>
+
+      <div className="fav-series-list">
+        {favouriteSeries.map((item) => (
+          <Serie
+            key={item.show.id}
+            title={item.show.name}
+            description={item.show.summary?.replace(/<[^>]*>/g, "") || ""}
+            genre={item.show.genres.join(", ")}
+            photoUrl={item.show.image?.medium}
+            addFavourite={() => removeFavourite(item)}
           />
         ))}
       </div>

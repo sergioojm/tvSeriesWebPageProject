@@ -11,3 +11,14 @@
     justify-content: center;
     padding: 16px;
 }
+
+
+.fav-series-list
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    padding: 16px;
+    margin-top: 32px
+}
