@@ -2,3 +2,12 @@
 {
     background-color: #333333;
 }
+
+.series-list
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    padding: 16px;
+}

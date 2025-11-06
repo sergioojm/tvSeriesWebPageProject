@@ -96,14 +96,14 @@ img.serie-photo {
 
 .serie-desc {
     color: var(--color-text-second);
-    text-align: left;
+    text-align: justify;
     font-weight: 400;
     font-size: 0.95rem;
     margin: 0;
     padding: 8px 16px 10px 16px;
     line-height: 1.4;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -111,13 +111,11 @@ img.serie-photo {
 
 
 .serie-footer {
+    margin-top: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    padding: 8px 12px 12px 12px;
-    border-top: 1px solid rgba(0,0,0,0.05);
-    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.02));
+    padding: 2px 12px 0 12px;
 }
 
 
@@ -146,7 +144,6 @@ img.serie-photo {
     font-size: 0.8rem;
     color: var(--color-text-second);
     padding: 6px 10px;
-    border-radius: 999px;
     background: rgba(0,0,0,0.03);
 }
 
