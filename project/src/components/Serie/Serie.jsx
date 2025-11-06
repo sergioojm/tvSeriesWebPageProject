@@ -2,7 +2,7 @@ import './styleSerie.css';
 import { useState } from 'react';
 import reactsvg from '../../assets/react.svg';
 
-function Serie()
+function Serie({title, description, genre, photoUrl})
 {
 
 
@@ -10,15 +10,15 @@ function Serie()
         
         <div className='serie-card'>
             <div className="serie-photo">
-                <img src={reactsvg} alt="Fernando Alonso" />
+                <img src={photoUrl} alt="Fernando Alonso" />
                 <button className='add-fav'>Favoritos</button>
             </div>
 
-            <p className="serie-title">TITULO DE EXAMPLE</p>
-            <p className="serie-desc">un poquito de texto un poquito de texto un poquito de texto un poquito de texto un poquito de texto</p>
+            <p className="serie-title">{title}</p>
+            <p className="serie-desc">{description}</p>
 
             <div className="serie-footer">
-                <span className="serie-tag">Drama</span>
+                <span className="serie-tag">{genre}</span>
                 <button className="see-more">Ver más</button>
             </div>
         </div>

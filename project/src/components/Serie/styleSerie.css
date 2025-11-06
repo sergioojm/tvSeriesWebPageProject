@@ -150,7 +150,7 @@ img.serie-photo {
     background: rgba(0,0,0,0.03);
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 1000px) {
     .serie-card { width: 47%; }
 }
@@ -158,5 +158,6 @@ img.serie-photo {
 @media (max-width: 640px) {
     .serie-card { width: 100%; min-width: 0; }
     .serie-title { font-size: 1rem; }
-    .serie-desc { -webkit-line-clamp: 4; }
+    .serie-desc { -webkit-line-clamp: 4; } 
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/line-clamp */
 }

@@ -1,20 +1,11 @@
 import './styleSearchBar.css';
-import { useState } from 'react';
 
-function Search({type = 'text', placeholder = '', disabled = false, className = 'chore-input' }) 
+
+function Search({type = 'text', placeholder = '', disabled = false, className = 'chore-input', stateValue, handleChange }) 
 {  
-  const [inputValue, setInputValue] = useState('');
-
-  
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
   return (
     <>
-      <input type={type} placeholder={placeholder} value={inputValue} onChange={handleChange} className={className} disabled={disabled}/>
-      <button className="search-button" onClick={() => alert(`Searching for: ${inputValue}`)}>Search</button>
-
+      <input type={type} placeholder={placeholder} value={stateValue} onChange={handleChange} className={className} disabled={disabled}/>
     </>
 
   );
