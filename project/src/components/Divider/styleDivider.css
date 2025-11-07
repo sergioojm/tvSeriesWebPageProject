@@ -1,0 +1,18 @@
+.divider-text {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #e9defa;
+  font-size: 48px;
+  font-weight: bold;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: 40px 0;
+}
+
+.divider-text::before,
+.divider-text::after {
+  content: "";
+  flex: 1;
+  border-bottom: 7px solid #e9defa;
+  margin: 0 20px;
+}

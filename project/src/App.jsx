@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Search from './components/searchBar/SearchBar'
 import Serie from './components/Serie/Serie'
 import SearchBtn from './components/searchBtn/SearchBtn';
-
+import Divider from './components/Divider/Divider';
 
 function App() {
 
@@ -52,6 +52,8 @@ function App() {
         <SearchBtn search={handleSearch} />
       </div>
 
+     
+
       <div className="series-list">
         {series.map((item) => (
           <Serie
@@ -66,18 +68,26 @@ function App() {
         ))}
       </div>
 
+ 
+       
+        {favouriteSeries.length > 0 && (
+          <Divider text={"Mis Series Favoritas"} />
+        )}
+
       <div className="fav-series-list">
-        {favouriteSeries.map((item) => (
-          <Serie
-            key={item.show.id}
-            title={item.show.name}
-            description={item.show.summary?.replace(/<[^>]*>/g, "") || ""}
-            genre={item.show.genres.join(", ")}
-            photoUrl={item.show.image?.medium}
-            addFavourite={() => removeFavourite(item)}
-            btnText={"Eliminar de Favoritos"}
-          />
-        ))}
+        {
+          favouriteSeries.map((item) => (
+            <Serie
+              key={item.show.id}
+              title={item.show.name}
+              description={item.show.summary?.replace(/<[^>]*>/g, "") || ""}
+              genre={item.show.genres.join(", ")}
+              photoUrl={item.show.image?.medium}
+              addFavourite={() => removeFavourite(item)}
+              btnText={"Eliminar de Favoritos"}
+            />
+          ))
+        }
       </div>
     </>
   );

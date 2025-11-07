@@ -1,7 +1,8 @@
-:root
+body
 {
     background-color: #333333;
 }
+
 
 .series-list
 {
@@ -22,3 +23,5 @@
     padding: 16px;
     margin-top: 32px
 }
+
+
