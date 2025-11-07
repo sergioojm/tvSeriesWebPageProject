@@ -3,6 +3,7 @@ import Search from './components/searchBar/SearchBar'
 import Serie from './components/Serie/Serie'
 import SearchBtn from './components/searchBtn/SearchBtn';
 import Divider from './components/Divider/Divider';
+import Modal from './components/Modal/Modal'
 
 function App() {
 
@@ -10,6 +11,9 @@ function App() {
   const [series, setSeries] = useState([]);
   const [favouriteSeries, setFavouriteSeries] = useState(JSON.parse(localStorage.getItem('series')) || []);
  
+  const [selectedShow, setSelectedShow] = useState(null)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalLoading, setModalLoading] = useState(false)
 
   const handleChangeFunction = (e) => {
       setInput(e.target.value);
@@ -31,6 +35,18 @@ function App() {
       console.error("Error al buscar series:", error);
     }
   };
+
+    const handleMoreClick = async (id) => {
+  setModalOpen(true)
+  setModalLoading(true)
+  setSelectedShow(null)
+  try {
+    const res = await fetch(`https://api.tvmaze.com/shows/${id}`)
+    setSelectedShow(await res.json())
+  } catch { setSelectedShow(null) } finally { setModalLoading(false) }
+}
+  
+
 
   const addFavourite = (serie) => {
 
@@ -63,6 +79,7 @@ function App() {
           <SearchBtn search={handleSearch} />
         </div>
 
+        <Modal open={modalOpen} loading={modalLoading} show={selectedShow} onClose={() => setModalOpen(false)} />
         
         <div className={`series-list ${series.length > 0 ? "visible" : ""}`}>
           {series.map((item) => (
@@ -74,6 +91,7 @@ function App() {
               photoUrl={item.show.image?.medium}
               addFavourite={() => addFavourite(item)}
               btnText={"Añadir a Favoritos"}
+              handleMore={() => handleMoreClick(item.show.id)}
             />
           ))}
         </div>

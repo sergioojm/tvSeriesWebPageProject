@@ -2,7 +2,7 @@ import './styleSerie.css';
 import { useState } from 'react';
 import reactsvg from '../../assets/react.svg';
 
-function Serie({title, description, genre, photoUrl, addFavourite, btnText})
+function Serie({title, description, genre, photoUrl, addFavourite, btnText, handleMore})
 {
     return (
         
@@ -17,7 +17,7 @@ function Serie({title, description, genre, photoUrl, addFavourite, btnText})
 
             <div className="serie-footer">
                 <span className="serie-tag">{genre}</span>
-                <button className="see-more">Ver más</button>
+                <button className="see-more" onClick={handleMore}>Ver más</button>
             </div>
         </div>
     
