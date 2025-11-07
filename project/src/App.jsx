@@ -16,7 +16,11 @@ function App() {
   };
 
    const handleSearch = async () => {
-    if (!input.trim()) return; 
+    if (!input.trim()) 
+    {
+      setSeries([]);
+      return;
+    }
 
     try {
       const response = await fetch(`https://api.tvmaze.com/search/shows?q=${input}`);
@@ -45,55 +49,56 @@ function App() {
     localStorage.setItem('series', JSON.stringify(newFavouriteSeries));
   }
 
+  const isEmpty = series.length === 0 && favouriteSeries.length === 0;
 
   return (
     <>
-      <div className="search-bar">
-        <Search
-          placeholder="Buscar serie..."
-          stateValue={input}
-          handleChange={handleChangeFunction}
-        />
-        <SearchBtn search={handleSearch} />
-      </div>
-
-     
-
-      <div className="series-list">
-        {series.map((item) => (
-          <Serie
-            key={item.show.id}
-            title={item.show.name}
-            description={item.show.summary?.replace(/<[^>]*>/g, "") || ""}
-            genre={item.show.genres.join(", ")}
-            photoUrl={item.show.image?.medium}
-            addFavourite={() => addFavourite(item)}
-            btnText={"Añadir a Favoritos"}
+      <div className={`app ${isEmpty ? 'empty' : 'active'}`}>
+        <div className="navbar search-bar">
+          <Search
+            placeholder="Buscar serie..."
+            stateValue={input}
+            handleChange={handleChangeFunction}
           />
-        ))}
-      </div>
+          <SearchBtn search={handleSearch} />
+        </div>
 
- 
-       
-        {favouriteSeries.length > 0 && (
-          <Divider text={"Mis Series Favoritas"} />
-        )}
-
-      <div className="fav-series-list">
-        {
-          favouriteSeries.map((item) => (
+        
+        <div className="series-list">
+          {series.map((item) => (
             <Serie
               key={item.show.id}
               title={item.show.name}
               description={item.show.summary?.replace(/<[^>]*>/g, "") || ""}
               genre={item.show.genres.join(", ")}
               photoUrl={item.show.image?.medium}
-              addFavourite={() => removeFavourite(item)}
-              btnText={"Eliminar de Favoritos"}
+              addFavourite={() => addFavourite(item)}
+              btnText={"Añadir a Favoritos"}
             />
-          ))
-        }
+          ))}
+        </div>
+
+        {favouriteSeries.length > 0 && (
+          <Divider text={"Mis Series Favoritas"} />
+        )}
+
+        <div className="fav-series-list">
+          {
+            favouriteSeries.map((item) => (
+              <Serie
+                key={item.show.id}
+                title={item.show.name}
+                description={item.show.summary?.replace(/<[^>]*>/g, "") || ""}
+                genre={item.show.genres.join(", ")}
+                photoUrl={item.show.image?.medium}
+                addFavourite={() => removeFavourite(item)}
+                btnText={"Eliminar de Favoritos"}
+              />
+            ))
+          }
+        </div>
       </div>
+    
     </>
   );
 }

@@ -1,27 +1,45 @@
-body
-{
-    background-color: #333333;
+body {
+  background-color: #333333;
+}
+
+.series-list,
+.fav-series-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding: 16px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 
-.series-list
-{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-    padding: 16px;
+.navbar {
+  width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 
-.fav-series-list
-{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-    padding: 16px;
-    margin-top: 32px
+.app.empty {
+  justify-content: center;   
+  align-items: center;      
+}
+
+
+.app.empty .navbar {
+  width: auto;
+  margin: 0 auto;
+}
+
+
+.app.active {
+  justify-content: flex-start; 
 }
 
 

@@ -8,7 +8,7 @@ function Serie({title, description, genre, photoUrl, addFavourite, btnText})
         
         <div className='serie-card'>
             <div className="serie-photo">
-                <img src={photoUrl} alt="Fernando Alonso" />
+                <img src={photoUrl} alt="No photo" />
                 <button className='add-fav' onClick={addFavourite}>{btnText}</button>
             </div>
 
