@@ -69,7 +69,7 @@ function App() {
             <Serie
               key={item.show.id}
               title={item.show.name}
-              description={item.show.summary?.replace(/<[^>]*>/g, "") || ""}
+              description={item.show.summary?.replace(/<[^>]*>/g, "")|| ""}
               genre={item.show.genres.join(", ")}
               photoUrl={item.show.image?.medium}
               addFavourite={() => addFavourite(item)}
