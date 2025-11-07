@@ -11,6 +11,19 @@ body {
   padding: 16px;
 }
 
+.series-list
+{
+    margin-top: 30vh;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.series-list.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -20,9 +33,22 @@ body {
 
 
 .navbar {
-  width: 100%;
-  padding: 0 16px;
+  position: fixed;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: fit-content;
+
+  background-color: #4b3f728b;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 8px;
+  padding: 4px;
   box-sizing: border-box;
+
+  
+
+  z-index: 50;
+  transition: top 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 
@@ -33,10 +59,15 @@ body {
 
 
 .app.empty .navbar {
-  width: auto;
-  margin: 0 auto;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
+.app.active .navbar {
+  position: absolute;
+  top: 20px;
+  transform: translateX(-50%);
+}
 
 .app.active {
   justify-content: flex-start; 

@@ -64,7 +64,7 @@ function App() {
         </div>
 
         
-        <div className="series-list">
+        <div className={`series-list ${series.length > 0 ? "visible" : ""}`}>
           {series.map((item) => (
             <Serie
               key={item.show.id}
