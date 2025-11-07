@@ -111,6 +111,7 @@ function App() {
                 photoUrl={item.show.image?.medium}
                 addFavourite={() => removeFavourite(item)}
                 btnText={"Eliminar de Favoritos"}
+                handleMore={() => handleMoreClick(item.show.id)}
               />
             ))
           }
