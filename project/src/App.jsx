@@ -29,6 +29,11 @@ function App() {
   };
 
   const addFavourite = (serie) => {
+
+    if (favouriteSeries.some((fav) => fav.show.id === serie.show.id)) {
+      return;
+    }
+
     const newFavouriteSeries = [...favouriteSeries, serie];
     setFavouriteSeries(newFavouriteSeries);
     localStorage.setItem('series', JSON.stringify(newFavouriteSeries));
