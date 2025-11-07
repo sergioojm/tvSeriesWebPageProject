@@ -72,7 +72,7 @@ function App() {
       <div className={`app ${isEmpty ? 'empty' : 'active'}`}>
         <div className="navbar search-bar">
           <Search
-            placeholder="Buscar serie..."
+            placeholder="Search serie..."
             stateValue={input}
             handleChange={handleChangeFunction}
           />
