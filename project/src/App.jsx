@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Search from './components/searchBar/SearchBar'
 import Serie from './components/Serie/Serie'
 import SearchBtn from './components/searchBtn/SearchBtn';
@@ -6,22 +6,30 @@ import Divider from './components/Divider/Divider';
 import Modal from './components/Modal/Modal'
 
 function App() {
-
   const [input, setInput] = useState('');
   const [series, setSeries] = useState([]);
   const [favouriteSeries, setFavouriteSeries] = useState(JSON.parse(localStorage.getItem('series')) || []);
- 
+  
   const [selectedShow, setSelectedShow] = useState(null)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalLoading, setModalLoading] = useState(false)
 
+ 
+  useEffect(() => {
+    localStorage.setItem('series', JSON.stringify(favouriteSeries));
+  }, [favouriteSeries]);
+
+  
+  useEffect(() => {
+    if (selectedShow) setModalOpen(true);
+  }, [selectedShow]);
+
   const handleChangeFunction = (e) => {
-      setInput(e.target.value);
+    setInput(e.target.value);
   };
 
-   const handleSearch = async () => {
-    if (!input.trim()) 
-    {
+  const handleSearch = async () => {
+    if (!input.trim()) {
       setSeries([]);
       return;
     }
@@ -29,40 +37,33 @@ function App() {
     try {
       const response = await fetch(`https://api.tvmaze.com/search/shows?q=${input}`);
       const data = await response.json();
-      
       setSeries(data);
     } catch (error) {
       console.error("Error al buscar series:", error);
     }
   };
 
-    const handleMoreClick = async (id) => {
-  setModalOpen(true)
-  setModalLoading(true)
-  setSelectedShow(null)
-  try {
-    const res = await fetch(`https://api.tvmaze.com/shows/${id}`)
-    setSelectedShow(await res.json())
-  } catch { setSelectedShow(null) } finally { setModalLoading(false) }
-}
-  
-
+  const handleMoreClick = async (id) => {
+    setModalLoading(true);
+    setSelectedShow(null);
+     
+    try {
+      const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
+      setSelectedShow(await res.json());
+    } catch {
+      setSelectedShow(null);
+    } finally {
+      setModalLoading(false);
+    }
+  }
 
   const addFavourite = (serie) => {
-
-    if (favouriteSeries.some((fav) => fav.show.id === serie.show.id)) {
-      return;
-    }
-
-    const newFavouriteSeries = [...favouriteSeries, serie];
-    setFavouriteSeries(newFavouriteSeries);
-    localStorage.setItem('series', JSON.stringify(newFavouriteSeries));
+    if (favouriteSeries.some(fav => fav.show.id === serie.show.id)) return;
+    setFavouriteSeries([...favouriteSeries, serie]);
   };
 
   const removeFavourite = (serie) => {
-    const newFavouriteSeries = favouriteSeries.filter((fav) => fav.show.id !== serie.show.id);
-    setFavouriteSeries(newFavouriteSeries);
-    localStorage.setItem('series', JSON.stringify(newFavouriteSeries));
+    setFavouriteSeries(favouriteSeries.filter(fav => fav.show.id !== serie.show.id));
   }
 
   const isEmpty = series.length === 0 && favouriteSeries.length === 0;
@@ -101,25 +102,22 @@ function App() {
         )}
 
         <div className="fav-series-list">
-          {
-            favouriteSeries.map((item) => (
-              <Serie
-                key={item.show.id}
-                title={item.show.name}
-                description={item.show.summary?.replace(/<[^>]*>/g, "") || ""}
-                genre={item.show.genres.join(", ")}
-                photoUrl={item.show.image?.medium}
-                addFavourite={() => removeFavourite(item)}
-                btnText={"Eliminar de Favoritos"}
-                handleMore={() => handleMoreClick(item.show.id)}
-              />
-            ))
-          }
+          {favouriteSeries.map((item) => (
+            <Serie
+              key={item.show.id}
+              title={item.show.name}
+              description={item.show.summary?.replace(/<[^>]*>/g, "") || ""}
+              genre={item.show.genres.join(", ")}
+              photoUrl={item.show.image?.medium}
+              addFavourite={() => removeFavourite(item)}
+              btnText={"Eliminar de Favoritos"}
+              handleMore={() => handleMoreClick(item.show.id)}
+            />
+          ))}
         </div>
       </div>
-    
     </>
   );
 }
 
-export default App
+export default App;
